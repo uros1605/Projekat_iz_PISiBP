@@ -158,6 +158,83 @@ class AdminMetode{
         $stmt->execute();
     }
 
+    function getNovinarRubrike($novinar_id)
+    {
+        $stmt = $this->conn->prepare("select * from  novinar_rubrika where id_novinara=?");
+        $stmt->bind_param("i",$novinar_id);
+        $stmt->execute();
+        $rezultat=$stmt->get_result();
+        
+        if($rezultat->num_rows > 0){
+            return $rezultat;
+        }
+        else{
+            return false;
+        } 
+    }
+
+    function getUrednikRubrike($urednik_id)
+    {
+        $stmt = $this->conn->prepare("select * from  urednik_rubrika where id_urednika=?");
+        $stmt->bind_param("i",$urednik_id);
+        $stmt->execute();
+        $rezultat=$stmt->get_result();
+        
+        if($rezultat->num_rows > 0){
+            return $rezultat;
+        }
+        else{
+            return false;
+        } 
+    }
+
+    function getRubrikaByID($rubrika_id)
+    {
+        $stmt = $this->conn->prepare("select * from  rubrika where id_rubrike=?");
+        $stmt->bind_param("i",$rubrika_id);
+        $stmt->execute();
+        $rezultat=$stmt->get_result();
+        
+        if($rezultat->num_rows > 0){
+            return $rezultat->fetch_assoc();
+        }
+        else{
+            return false;
+        } 
+    }
+
+    function getBrojClanakaByNovinar($novinar_id)
+    {
+        $stmt = $this->conn->prepare("select count(*) as broj_clanaka from vest where id_novinara = ? ");
+        $stmt->bind_param("i",$novinar_id);
+        $stmt->execute();
+        $rezultat = $stmt->get_result();
+        return $rezultat->fetch_assoc();
+    }
+
+    function getNovinarByID($novinar_id)
+    {
+        $stmt = $this->conn->prepare("select * from redakcija where id_korisnika=?");
+        $stmt->bind_param("i",$novinar_id);
+        $stmt->execute();
+        $rezultat=$stmt->get_result();
+        
+        if($rezultat->num_rows > 0){
+            return $rezultat->fetch_assoc();
+        }
+        else{
+            return false;
+        } 
+    }
+
+    function obrisiKorisnika($id_korisnika)
+    {
+        $stmt = $this->conn->prepare("delete from redakcija where id_korisnika = ?");
+        $stmt->bind_param("i",$id_korisnika);
+        $stmt->execute();
+    }
+
+
 }
 
 $metode = new AdminMetode("localhost", "root", "", "uros_projekat");

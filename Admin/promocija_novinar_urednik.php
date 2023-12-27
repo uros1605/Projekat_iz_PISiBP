@@ -26,11 +26,18 @@ if (isset($_SESSION["id_korisnika"])) {
     <form action="promocija_novinar_urednik.php" method="post">
         <select name="novinar_id">
             <?php
+            if(isset($_GET["id_novinara"])){
+                $id_nivinara = $_GET["id_novinara"];
+                $novinar = $metode->getNovinarByID($id_nivinara);
+                echo "<option value=$novinar[id_korisnika]>$novinar[ime_prezime]</option>";
+            }
+            else{
             $novinari = $metode->getSveNovinare();
             if($novinari != false){
                 while($novinar = $novinari->fetch_assoc()){
                     echo "<option value=$novinar[id_korisnika]>$novinar[ime_prezime]</option>";
                 }
+            }
             }
             ?>
         </select>

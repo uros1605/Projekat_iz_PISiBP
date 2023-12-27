@@ -1,0 +1,20 @@
+.main{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: azure;
+    flex-direction: row;
+}
+
+.polje{
+    width: 50%;
+}
+
+.novinar_polje{
+    width: 33%;
+    background-color: bisque;
+}
+
+.uredni_polje{
+    width: 33%;
+    background-color: bisque;
+}
