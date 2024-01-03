@@ -49,10 +49,10 @@ class AdminMetode{
         }
     }
 
-    function setUser($username, $password, $ime_prezime, $uloga)
+    function setUser($username, $password, $ime_prezime, $uloga, $email)
     {
-        $stmt = $this->conn->prepare("insert into redakcija (username, password, ime_prezime,uloga) values (?,?,?,?)");
-        $stmt->bind_param("ssss",$username, $password, $ime_prezime, $uloga);
+        $stmt = $this->conn->prepare("insert into redakcija (username, password, ime_prezime, uloga, email) values (?,?,?,?,?)");
+        $stmt->bind_param("sssss",$username, $password, $ime_prezime, $uloga, $email);
         $stmt->execute();
     }
 
@@ -229,8 +229,29 @@ class AdminMetode{
 
     function obrisiKorisnika($id_korisnika)
     {
-        $stmt = $this->conn->prepare("delete from redakcija where id_korisnika = ?");
+        $stmt = $this->conn->prepare("update redakcija set uloga = 'stari' where id_korisnika = ?");
         $stmt->bind_param("i",$id_korisnika);
+        $stmt->execute();
+    }
+
+    function obrisiNovinaruRubriku($novinar_id, $rubrika_id)
+    {
+        $stmt = $this->conn->prepare("delete from novinar_rubrika where id_novinara = ? and id_rubrike = ?");
+        $stmt->bind_param("ii",$novinar_id,$rubrika_id);
+        $stmt->execute();
+    }
+
+    function obrisiUrednikuRubriku($urednik_id, $rubrika_id)
+    {
+        $stmt = $this->conn->prepare("delete from urednik_rubrika where id_urednika = ? and id_rubrike = ?");
+        $stmt->bind_param("ii",$urednik_id,$rubrika_id);
+        $stmt->execute();
+    }
+
+    function azurirajKorisnika($id_korisnika, $username, $ime_prezime, $password, $email)
+    {
+        $stmt = $this->conn->prepare("update redakcija set username = ?, password = ?, ime_prezime = ?, email = ? where id_korisnika = ?");
+        $stmt->bind_param("ssssi", $username, $password, $ime_prezime, $email, $id_korisnika);
         $stmt->execute();
     }
 

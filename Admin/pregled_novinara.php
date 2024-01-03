@@ -1,6 +1,9 @@
 <?php
 include "klase.php";
 if (isset($_SESSION["id_korisnika"])) {
+    if(isset($_GET["id_novinara"])) {
+        $metode->obrisiNovinaruRubriku($_GET["id_novinara"],$_GET["id_rubrike"]);
+    }
 
 
 ?>
@@ -32,7 +35,7 @@ if (isset($_SESSION["id_korisnika"])) {
             if($rubrike_novinar != false){
                 while($rubrika_novinar = $rubrike_novinar->fetch_assoc()){
                     $rubrika = $metode->getRubrikaByID($rubrika_novinar["id_rubrike"]);
-                    echo "<p>$rubrika[naziv]</p>";
+                    echo "<p>$rubrika[naziv] <a href=pregled_novinara.php?id_novinara=$novinar[id_korisnika]&id_rubrike=$rubrika[id_rubrike]><button>Obriši rubriku</button></a></p>";
                 }
             }
             else{
@@ -42,8 +45,8 @@ if (isset($_SESSION["id_korisnika"])) {
             $broj_clanaka = $metode->getBrojClanakaByNovinar($novinar["id_korisnika"]);
             echo "<p>$broj_clanaka[broj_clanaka]</p>";
             echo "<div>
-            <a href=izmena_korisnika.php?id_novinara=$novinar[id_korisnika]><button>Izmena novinara</button></a>
-            <a href=brisanje_korisnika.php?id_korisnika=$novinar[id_korisnika]><button>Obriši</button></a>
+            <a href=izmena_novinara.php?id_novinara=$novinar[id_korisnika]><button>Izmena novinara</button></a>
+            <a href=brisanje_korisnika.php?id_korisnika=$novinar[id_korisnika]&status=$novinar[uloga]><button>Obrisi</button></a>
             <a href=promocija_novinar_urednik.php?id_novinara=$novinar[id_korisnika]><button>Promocija novinara</button></a>
             </div>";
             echo "</div>";

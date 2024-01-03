@@ -6,10 +6,11 @@ if (isset($_SESSION["id_korisnika"])) {
         $ime_prezime = $_POST["ime_prezime"];
         $password = md5($_POST["password"]);
         $uloga = $_POST["uloga"];
+        $email = $_POST["email"];
 
         $korisnik = $metode->checkUser($username);
         if($korisnik == false){
-            $metode->setUser($username, $password, $ime_prezime, $uloga); 
+            $metode->setUser($username, $password, $ime_prezime, $uloga, $email); 
             $potvrda = $uloga." ".$ime_prezime." je kreiran";
         }
         else{
@@ -38,6 +39,7 @@ if (isset($_SESSION["id_korisnika"])) {
         <input type="text" name="username" placeholder="unesi korisnicko ime">
         <input type="text" name="ime_prezime" placeholder="ime i prezime">
         <input type="password" name="password" placeholder="lozinka">
+        <input type="email" name="email" placeholder="email">
         <label>Uloga</label>
         <select name="uloga">
             <option value="urednik">Urednik</option>

@@ -20,6 +20,9 @@ if (isset($_SESSION["id_korisnika"])) {
     include "menu.php";
     ?>
     <div class="main">
+        <?php
+        if($_SESSION["uloga"] == "glavni urednik"){ 
+        ?>
     <div class="polje">
         <h3>Pregled novinara</h3>
         <a href="pregled_novinara.php"><button>Pregled novinara</button></a>
@@ -41,17 +44,46 @@ if (isset($_SESSION["id_korisnika"])) {
         <a href="kreiraj_korisnika.php"><button>Kreiraj</button></a>
     </div>
     <div class="polje">
-        <h3>Dodeli ili obrisi rubriku novinara</h3>
+        <h3>Dodeli rubriku novinarima</h3>
         <a href="dodela_rubrika_novinarima.php"><button>Dodeli</button></a>
     </div>
     <div class="polje">
-        <h3>Dodeli ili obrisi rubriku urednicima</h3>
+        <h3>Dodeli rubriku urednicima</h3>
         <a href="dodela_rubrika_urednicima.php"><button>Dodeli</button></a>
     </div>
     <div class="polje">
         <h3>Promena statusa novinara</h3>
         <a href="promocija_novinar_urednik.php"><button>Promoviši</button></a>
     </div>
+
+    <?php
+    }
+
+    if($_SESSION["uloga"] == "novinar") {
+        echo "<h2>".$_SESSION["ime_prezime"]."<h2>";
+        echo "<h2>".$_SESSION["email"]."<h2>";
+        $rubrike_novinar = $metode->getNovinarRubrike($_SESSION["id_korisnika"]);
+            if($rubrike_novinar != false){
+                while($rubrika_novinar = $rubrike_novinar->fetch_assoc()){
+                    $rubrika = $metode->getRubrikaByID($rubrika_novinar["id_rubrike"]);
+                    echo "<p>$rubrika[naziv]</p>";
+                }
+            }
+            else{
+                echo "<p>Ovaj novinar nije ni u jednoj rubrici</p>";
+            }
+
+    ?>
+         <div class="polje">
+            <h3>Napiši novi članak</h3>
+            <a href="napisi_clanak.php"><button>Napiši</button></a>
+        </div>
+
+    <?php
+    }
+
+
+    ?>
     </div>
     
     </section>
