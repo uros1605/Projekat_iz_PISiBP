@@ -78,6 +78,33 @@ if (isset($_SESSION["id_korisnika"])) {
             <h3>Napiši novi članak</h3>
             <a href="napisi_clanak.php"><button>Napiši</button></a>
         </div>
+        <div class="polje">
+            <h3>Lista članaka u draft stanju</h3>
+            <?php
+            $vesti_novinara_draft = $metode->getVestiByKorisnik($_SESSION["id_korisnika"], "draft");
+            if ($vesti_novinara_draft != false) {
+                while ($vest = $vesti_novinara_draft->fetch_assoc()) {
+                     echo "<p>$vest[naslov] <a href=izmeni_vest.php?id_vesti=$vest[id_vesti]><button>Izmeni vest</button></a></p>";
+                }
+                } else {
+                    echo "<p>Nemate nijdan draft članak</p>";
+                }
+            ?>
+        </div>
+
+        <div class="polje">
+            <h3>Lista članaka koji čekaju odobrenje</h3>
+            <?php
+            $vesti_novinara_draft = $metode->getVestiByKorisnik($_SESSION["id_korisnika"], "odobrenje");
+            if ($vesti_novinara_draft != false) {
+                while ($vest = $vesti_novinara_draft->fetch_assoc()) {
+                    echo "<p>$vest[naslov] <a href=procitaj_clanak.php?id_vesti=$vest[id_vesti]><button>pročitaj članak</button></a></p>";
+                }
+            } else {
+                echo "<p>Nemate nijdan draft članak</p>";
+            }
+            ?>
+        </div>
 
     <?php
     }

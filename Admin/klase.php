@@ -14,7 +14,7 @@ class AdminMetode{
         $this->db_name = $db_name;
 
         $this->conn = new mysqli($this->hostname, $this->user, $this->password, $this->db_name);
-        mysqli_set_charset($this->conn, "utf-8");
+        mysqli_set_charset($this->conn, "utf8");
     }
 
     function getUser($username, $password)
@@ -255,8 +255,50 @@ class AdminMetode{
         $stmt->execute();
     }
 
+    function sacuvajVest($id_korisnika, $rubrika_id, $naslov, $sadrzaj, $datum_vreme, $stanje)
+    {
+        $stmt = $this->conn->prepare("insert into vest (naslov, sadrzaj, datum_vreme, stanje, id_novinara, id_rubrike) values (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssii", $naslov, $sadrzaj, $datum_vreme, $stanje, $id_korisnika, $rubrika_id);
+        $stmt->execute();
+    }
+
+    function getVestiByKorisnik($id_korisnika, $stanje)
+    {
+        $stmt = $this->conn->prepare("select * from vest where id_novinara = ? and stanje = ? order by datum_vreme desc");
+        $stmt->bind_param("is", $id_korisnika, $stanje);
+        $stmt->execute();
+        $rezultat = $stmt->get_result();
+
+        if ($rezultat->num_rows > 0) {
+            return $rezultat;
+        } else {
+            return false;
+        }
+    }
+
+    function getVestByID($id_vesti)
+    {
+        $stmt = $this->conn->prepare("select * from vest where id_vesti = ?");
+        $stmt->bind_param("i", $id_vesti);
+        $stmt->execute();
+        $rezultat = $stmt->get_result();
+
+        if ($rezultat->num_rows > 0) {
+            return $rezultat->fetch_assoc();
+        } else {
+            return false;
+        }
+    }
+
+    function azurirajVest($naslov, $stanje, $sadrzaj, $rubrika_id, $datum_vreme, $id_vesti)
+    {
+        $stmt = $this->conn->prepare("update vest set naslov = ?, sadrzaj = ?, datum_vreme = ?, id_rubrike = ?, stanje = ? where id_vesti = ?");
+        $stmt->bind_param("sssisi", $naslov, $sadrzaj, $datum_vreme, $rubrika_id, $stanje, $id_vesti);
+        $stmt->execute();
+    }
+
 
 }
 
-$metode = new AdminMetode("localhost", "root", "", "uros_projekat");
+$metode = new AdminMetode("localhost", "root", "", "pis_baza");
 session_start();
