@@ -89,7 +89,7 @@ if (isset($_SESSION["id_korisnika"])) {
 
                         </div>
                     </form>
-                    <a href="obrisi_vest.php?id_vesti=<?php echo $vest["id_vesti"]; ?>"><button class="btn btn-danger">Obriši vest</button></a>
+                    <a href="brisanje_vesti.php?id_vesti=<?php echo $vest["id_vesti"]; ?>"><button class="btn btn-danger">Obriši vest</button></a>
                 </div>
             </div>
 

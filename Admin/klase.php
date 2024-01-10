@@ -188,6 +188,20 @@ class AdminMetode{
         } 
     }
 
+    function getUredniciRubrike($rubrika_id)
+    {
+        $stmt = $this->conn->prepare("select * from  urednik_rubrika where id_rubrike=?");
+        $stmt->bind_param("i", $rubrika_id);
+        $stmt->execute();
+        $rezultat = $stmt->get_result();
+
+        if ($rezultat->num_rows > 0) {
+            return $rezultat;
+        } else {
+            return false;
+        }
+    }
+
     function getRubrikaByID($rubrika_id)
     {
         $stmt = $this->conn->prepare("select * from  rubrika where id_rubrike=?");
@@ -290,6 +304,13 @@ class AdminMetode{
         }
     }
 
+    function obrisiVest($id_vesti)
+    {
+        $stm = $this->conn->prepare("delete from vest where id_vesti = ?");
+        $stm->bind_param("i", $id_vesti);
+        $stm->execute();
+    }
+
     function azurirajVest($naslov, $stanje, $sadrzaj, $rubrika_id, $datum_vreme, $id_vesti)
     {
         $stmt = $this->conn->prepare("update vest set naslov = ?, sadrzaj = ?, datum_vreme = ?, id_rubrike = ?, stanje = ? where id_vesti = ?");
@@ -297,8 +318,57 @@ class AdminMetode{
         $stmt->execute();
     }
 
+    function getVestiByIDRubrike($id_rubrike, $stanje)
+    {
+        $stmt = $this->conn->prepare("select * from vest where id_rubrike = ? and stanje = ?");
+        $stmt->bind_param("is", $id_rubrike, $stanje);
+        $stmt->execute();
+        $rezultat = $stmt->get_result();
+
+        if ($rezultat->num_rows > 0) {
+            return $rezultat;
+        } else {
+            return false;
+        }
+    }
+
+    function izmeniStanjeVesti($id_vesti, $stanje)
+    {
+        $stmt = $this->conn->prepare("update vest set stanje = ? where id_vesti = ?");
+        $stmt->bind_param("si", $stanje, $id_vesti);
+        $stmt->execute();
+    }
+
+    function getNovinariByRubrika($id_rubrike)
+    {
+        $stmt = $this->conn->prepare("select * from novinar_rubrika where id_rubrike = ?");
+        $stmt->bind_param("i", $id_rubrike);
+        $stmt->execute();
+        $rezultat = $stmt->get_result();
+
+        if ($rezultat->num_rows > 0) {
+            return $rezultat;
+        } else {
+            return false;
+        }
+    }
+
+    function getVestiByStanje($stanje)
+    {
+        $stmt = $this->conn->prepare("select * from vest where stanje = ? order by datum_vreme desc");
+        $stmt->bind_param("s", $stanje);
+        $stmt->execute();
+        $rezultat = $stmt->get_result();
+
+        if ($rezultat->num_rows > 0) {
+            return $rezultat;
+        } else {
+            return false;
+        }
+    }
+
 
 }
 
-$metode = new AdminMetode("localhost", "root", "", "pis_baza");
+$metode = new AdminMetode("localhost", "root", "", "uros_projekat1");
 session_start();

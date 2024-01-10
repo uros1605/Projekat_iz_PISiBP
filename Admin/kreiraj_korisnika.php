@@ -27,6 +27,7 @@ if (isset($_SESSION["id_korisnika"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administracija - Kreiranje korisnika</title>
+    <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
@@ -35,7 +36,7 @@ if (isset($_SESSION["id_korisnika"])) {
     ?>
     <h3><?php if(isset($potvrda)) {echo $potvrda;} ?></h3>
 
-    <form action="kreiraj_korisnika.php" method="post">
+    <form action="kreiraj_korisnika.php" method="post" class="forma">
         <input type="text" name="username" placeholder="unesi korisnicko ime">
         <input type="text" name="ime_prezime" placeholder="ime i prezime">
         <input type="password" name="password" placeholder="lozinka">

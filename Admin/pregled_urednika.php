@@ -35,15 +35,15 @@ if (isset($_SESSION["id_korisnika"])) {
             if($rubrike_urednik != false){
                 while($rubrika_urednik = $rubrike_urednik->fetch_assoc()){
                     $rubrika = $metode->getRubrikaByID($rubrika_urednik["id_rubrike"]);
-                    echo "<p>$rubrika[naziv] <a href=pregled_urednika.php?id_urednika=$urednik[id_korisnika]&id_rubrike=$rubrika[id_rubrike]><button>Obriši rubriku</button></a></p>";
+                    echo "<p>$rubrika[naziv] <a href=pregled_urednika.php?id_urednika=$urednik[id_korisnika]&id_rubrike=$rubrika[id_rubrike]><button class=dugme>Obriši rubriku</button></a></p>";
                 }
             }
             else{
                 echo "<p>Ovaj urednik nije ni u jednoj rubrici</p>";
             }
             echo "<div>
-            <a href=izmena_urednika.php?id_urednika=$urednik[id_korisnika]><button>Izmena urednika</button></a>
-            <a href=brisanje_korisnika.php?id_korisnika=$urednik[id_korisnika]&status=$urednik[uloga]><button>Obriši</button></a>
+            <a href=izmena_urednika.php?id_urednika=$urednik[id_korisnika]><button class=dugme>Izmena urednika</button></a>
+            <a href=brisanje_korisnika.php?id_korisnika=$urednik[id_korisnika]&status=$urednik[uloga]><button class=dugme>Obriši</button></a>
             </div>";
             echo "</div>";
         }

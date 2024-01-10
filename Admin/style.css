@@ -1,20 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Playfair Display', serif;
+
+}
+
+body {
+    background-color: azure;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+    margin: 5px;
+}
+
+
 .main{
     display: flex;
     flex-wrap: wrap;
-    background-color: azure;
     flex-direction: row;
 }
 
 .polje{
-    width: 50%;
+    width: 45%;
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
 }
 
-.novinar_polje{
-    width: 33%;
-    background-color: bisque;
-}
-
+.novinar_polje,
 .urednik_polje{
-    width: 33%;
+    width: 30%;
     background-color: bisque;
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+}
+
+.dugme {
+    background-color: deepskyblue;
+    margin: 10px;
+    padding: 10px;
+}
+
+.dugme:hover {
+    background-color: aquamarine;
+}
+
+.forma {
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+.forma input,
+.forma label,
+.forma select {
+    margin: 5px;
+    padding: 5px;
+}
+
+.clanak {
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pocetna_velika_slova {
+    text-transform: capitalize;
+}
+
+.sredina {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

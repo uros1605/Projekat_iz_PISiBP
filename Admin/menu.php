@@ -1,3 +1,3 @@
-<a href="naslovna.php">Početna</a>
-<a href="logout.php"> Izloguj se </a>
+<a href="naslovna.php"><button class="dugme">Početna</button></a>
+<a href="logout.php"><button class="dugme">Izloguj se</button></a>
 

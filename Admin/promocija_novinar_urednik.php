@@ -16,6 +16,7 @@ if (isset($_SESSION["id_korisnika"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administracija - Promocija novinara u urednika</title>
+    <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
@@ -23,7 +24,7 @@ if (isset($_SESSION["id_korisnika"])) {
     include "menu.php";
     ?>
     <h3><?php if(isset($potvrda)) {echo $potvrda;} ?></h3>
-    <form action="promocija_novinar_urednik.php" method="post">
+    <form action="promocija_novinar_urednik.php" method="post" class="forma">
         <select name="novinar_id">
             <?php
             if(isset($_GET["id_novinara"])){

@@ -23,8 +23,9 @@ if(isset($_POST["submit"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>Administracija - Login</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="sredina">
     <form action="index.php" method="post">
         <input type="text" name="username" placeholder="Korisničko ime" required>
         <input type="password" name="password" placeholder="Lozinka" required>

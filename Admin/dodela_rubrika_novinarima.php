@@ -20,6 +20,7 @@ if (isset($_SESSION["id_korisnika"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administracija - Dodela rubrika</title>
+    <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
@@ -27,7 +28,7 @@ if (isset($_SESSION["id_korisnika"])) {
     include "menu.php";
     ?>
     <h3><?php if(isset($potvrda)) {echo $potvrda;} ?></h3>
-    <form action="dodela_rubrika_novinarima.php" method="post">
+    <form action="dodela_rubrika_novinarima.php" method="post" class="forma">
         <select name="novinar_id">
             <?php
             $novinari = $metode->getSveNovinare();
