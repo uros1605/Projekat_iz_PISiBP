@@ -6,8 +6,19 @@ if (isset($_SESSION["id_korisnika"])) {
         $sadrzaj = $_POST["sadrzaj"];
         $rubrika_id = $_POST["rubrika"];
         $datum_vreme = date("Y-m-d h:i:s");
-        $metode->sacuvajVest($_SESSION["id_korisnika"], $rubrika_id, $naslov, $sadrzaj, $datum_vreme, "draft");
-        $potvrda = "Članak je sačuvan kao draft";
+        include "upload_slika.php";
+        if ($uploadOk == 1) {
+            $slika_url = "slike/" . htmlspecialchars(basename($_FILES["slika"]["name"]));
+            $metode->sacuvajVest($_SESSION["id_korisnika"], $rubrika_id, $naslov, $sadrzaj, $datum_vreme, "draft", $slika_url);
+            $potvrda = "Članak je sačuvan kao draft";
+            $id_unete_vesti = $metode->getPoslednjaVest()["id_vesti"];
+            $tagovi = $_POST["tagovi"];
+
+            $tagovi_niz = explode(",", $tagovi);
+            foreach ($tagovi_niz as $tag) {
+                $metode->unesiTag($id_unete_vesti, trim($tag));
+            }
+        }
     }
 
     if (isset($_POST["submit"])) {
@@ -15,8 +26,19 @@ if (isset($_SESSION["id_korisnika"])) {
         $sadrzaj = $_POST["sadrzaj"];
         $rubrika_id = $_POST["rubrika"];
         $datum_vreme = date("Y-m-d h:i:s");
-        $metode->sacuvajVest($_SESSION["id_korisnika"], $rubrika_id, $naslov, $sadrzaj, $datum_vreme, "odobrenje");
-        $potvrda = "Članak je poslat na odobrenje";
+        include "upload_slika.php";
+        if ($uploadOk == 1) {
+            $slika_url = "slike/" . htmlspecialchars(basename($_FILES["slika"]["name"]));
+            $metode->sacuvajVest($_SESSION["id_korisnika"], $rubrika_id, $naslov, $sadrzaj, $datum_vreme, "odobrenje", $slika_url);
+            $potvrda = "Članak je poslat na odobrenje";
+            $id_unete_vesti = $metode->getPoslednjaVest()["id_vesti"];
+            $tagovi = $_POST["tagovi"];
+
+            $tagovi_niz = explode(",", $tagovi);
+            foreach ($tagovi_niz as $tag) {
+                $metode->unesiTag($id_unete_vesti, trim($tag));
+            }
+        }
     }
 
 
@@ -49,6 +71,10 @@ if (isset($_SESSION["id_korisnika"])) {
                     ?>
                     <form method="post" action="">
                         <div class="mb-3">
+                            <label><strong>Glavna slika :</strong></label>
+                            <input type="file" name="slika" class="form-control">
+                        </div>
+                        <div class="mb-3">
                             <label><strong>Naslov:</strong></label>
                             <input type="text" name="naslov" class="form-control">
                         </div>
@@ -68,6 +94,10 @@ if (isset($_SESSION["id_korisnika"])) {
                         <div class="mb-1">
                             <label><strong>Sadržaj</strong></label>
                             <textarea name="sadrzaj" id="mytextarea" class="form-control"></textarea><br>
+                        </div>
+                        <div class="mb-3">
+                            <label><strong>Tagovi:</strong></label>
+                            <input type="text" name="tagovi" class="form-control">
                         </div>
                         <div class="d-flex justtify-content-center">
                             <input type="submit" name="submit" value="Pošalji na odobrenje" class="btn btn-success">

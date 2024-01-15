@@ -87,3 +87,13 @@ p {
     justify-content: center;
     align-items: center;
 }
+
+.prikaz_rubrike {
+    display: flex;
+    flex-direction: row;
+}
+
+.kolona {
+    width: 25%;
+
+}

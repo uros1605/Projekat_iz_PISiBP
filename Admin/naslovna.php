@@ -38,7 +38,20 @@ if (isset($_SESSION["id_korisnika"])) {
                 </div>
                 <div class="polje">
                     <h3>Pregled rubrika</h3>
-                    <a href="pregled_rubrika.php"><button class="dugme">Pregled rubrika</button></a>
+                    <form action="pregled_rubrike.php">
+                        <select name="rubrika">
+                            <?php
+                            $rubrike = $metode->getSveRubrike();
+                            while ($rubrika = $rubrike->fetch_assoc()) {
+                                $rubrika_info = $metode->getRubrikaByID($rubrika["id_rubrike"]);
+                                echo "<option value=$rubrika_info[id_rubrike]>$rubrika_info[naziv]</option>";
+                            }
+
+                            ?>
+                        </select>
+                        <input type="submit" value="Pregled rubrike" class="dugme">
+                    </form>
+
                 </div>
                 <div class="polje">
                     <h3>Odobravanje članaka</h3>
@@ -208,6 +221,30 @@ if (isset($_SESSION["id_korisnika"])) {
                                 while ($vest = $vesti_iz_rubrike->fetch_assoc()) {
                                     echo "<p>$vest[naslov] 
                                         <a href=procitaj_clanak.php?id_vesti=$vest[id_vesti]><button class=dugme>pročitaj članak</button></a>
+                                        
+                                        </p>";
+                                }
+                            }
+                        }
+                    } else {
+                        echo "<p>Ovaj urednik nije ni u jednoj rubrici</p>";
+                    }
+
+                    ?>
+                </div>
+
+                <div class="polje">
+                    <h3>Zahtevi za izmenu ili brisanje članak</h3>
+                    <?php
+                    $rubrike_urednik = $metode->getUrednikRubrike($_SESSION["id_korisnika"]);
+                    if ($rubrike_urednik != false) {
+                        while ($rubrika_urednik = $rubrike_urednik->fetch_assoc()) {
+                            $vesti_iz_rubrike_zahtevi = $metode->getZahtevByIdRubrike($rubrika_urednik["id_rubrike"]);
+                            if ($vesti_iz_rubrike_zahtevi != false) {
+                                while ($vest_zahtev = $vesti_iz_rubrike_zahtevi->fetch_assoc()) {
+                                    $vest = $metode->getVestByID($vest_zahtev["id_vesti"]);
+                                    echo "<p>$vest[naslov] Vrsta zahetva: <b>$vest_zahtev[vrsta]</b>
+                                        <a href=procitaj_clanak.php?id_vesti=$vest[id_vesti]&id_zahteva=$vest_zahtev[id_zahteva]&vrsta_zahteva=$vest_zahtev[vrsta]><button class=dugme>pročitaj članak</button></a>
                                         
                                         </p>";
                                 }

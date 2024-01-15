@@ -269,10 +269,10 @@ class AdminMetode{
         $stmt->execute();
     }
 
-    function sacuvajVest($id_korisnika, $rubrika_id, $naslov, $sadrzaj, $datum_vreme, $stanje)
+    function sacuvajVest($id_korisnika, $rubrika_id, $naslov, $sadrzaj, $datum_vreme, $stanje, $slika_url)
     {
-        $stmt = $this->conn->prepare("insert into vest (naslov, sadrzaj, datum_vreme, stanje, id_novinara, id_rubrike) values (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssii", $naslov, $sadrzaj, $datum_vreme, $stanje, $id_korisnika, $rubrika_id);
+        $stmt = $this->conn->prepare("insert into vest (naslov, sadrzaj, datum_vreme, stanje, id_novinara, id_rubrike) values (?, ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssiis", $naslov, $sadrzaj, $datum_vreme, $stanje, $id_korisnika, $rubrika_id, $slika_url);
         $stmt->execute();
     }
 
@@ -365,6 +365,75 @@ class AdminMetode{
         } else {
             return false;
         }
+    }
+
+    function posaljiZahtev($id_vesti, $id_rubrike, $novinar_id, $vrsta)
+    {
+        $stmt = $this->conn->prepare("insert into zahtevi (id_vesti, id_rubrike, id_novinara, vrsta) values(?, ?, ?, ?)");
+        $stmt->bind_param("iiis", $id_vesti, $id_rubrike, $novinar_id, $vrsta);
+        $stmt->execute();
+    }
+
+    function getZahtevByIdVesti($id_vesti)
+    {
+        $stmt = $this->conn->prepare("select * from zahtevi where id_vesti = ?");
+        $stmt->bind_param("i", $id_vesti);
+        $stmt->execute();
+        $rezultat = $stmt->get_result();
+
+        if ($rezultat->num_rows > 0) {
+            return $rezultat->fetch_assoc();
+        } else {
+            return false;
+        }
+    }
+
+    function getZahtevByIdRubrike($id_rubrike)
+    {
+        $stmt = $this->conn->prepare("select * from zahtevi where id_rubrike = ?");
+        $stmt->bind_param("i", $id_rubrike);
+        $stmt->execute();
+        $rezultat = $stmt->get_result();
+
+        if ($rezultat->num_rows > 0) {
+            return $rezultat;
+        } else {
+            return false;
+        }
+    }
+
+    function azurirajStanjeVesti($id_vesti, $stanje)
+    {
+        $stmt = $this->conn->prepare("update vest set stanje = ? where id_vesti = ?");
+        $stmt->bind_param("si", $stanje, $id_vesti);
+        $stmt->execute();
+    }
+
+    function obrisiZahtev($id_zahteva)
+    {
+        $stmt = $this->conn->prepare("delete from zahtevi where id_zahteva = ?");
+        $stmt->bind_param("i", $id_zahteva);
+        $stmt->execute();
+    }
+
+    function getPoslednjaVest()
+    {
+        $stmt = $this->conn->prepare("select * from vest order by datum_vreme desc limit 1");
+        $stmt->execute();
+        $rezultat = $stmt->get_result();
+
+        if ($rezultat->num_rows > 0) {
+            return $rezultat->fetch_assoc();
+        } else {
+            return false;
+        }
+    }
+
+    function unesiTag($id_vesti, $sadrzaj)
+    {
+        $stmt = $this->conn->prepare("insert into tagovi (id_vesti, sadrzaj) values (? , ?)");
+        $stmt->bind_param("is", $id_vesti, $sadrzaj);
+        $stmt->execute();
     }
 
 
