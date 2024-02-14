@@ -1,0 +1,433 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Playfair Display', serif;
+
+}
+
+
+.pseudolink {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+
+.wrapper_crno {
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 80%;
+    padding: 10px 0px;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header a {
+    color: white;
+    text-decoration: none;
+
+}
+
+.ikonica {
+    color: white;
+    font-size: 2em;
+}
+
+.login {
+    display: flex;
+    padding: 5px 50px 5px 5px;
+    flex-direction: row;
+    align-items: center;
+}
+
+.login:hover {
+    border-bottom: 2px red solid;
+}
+
+.header ul {
+    list-style: none;
+
+}
+
+.header li {
+    display: inline-block;
+}
+
+.header a {
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+
+}
+
+.header a:hover {
+    border-bottom: 2px rgb(125, 217, 111) solid;
+}
+
+.header input[type="search"] {
+    background-color: whitesmoke;
+    border: none;
+    width: 150px;
+    height: 2em;
+    border-radius: 3px;
+}
+
+.header input[type="date"] {
+    background-color: whitesmoke;
+    border: none;
+    padding: 5px;
+    border-radius: 3px;
+    width: 18px;
+}
+
+.datum_search input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+.header input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 7px 15px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.header input[type="submit"]:hover {
+    background-color: #000;
+}
+
+.glavna {
+    display: flex;
+    padding: 10px 0px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.naslov {
+    display: flex;
+    justify-content: space-between;
+}
+
+.glavne_vesti {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0px;
+}
+
+.prva_vest {
+    width: 49%;
+    height: 20em;
+    overflow: hidden;
+    position: relative;
+}
+
+.prva_vest img {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -5;
+}
+
+.prva_vest h2 {
+    position: absolute;
+    z-index: 10;
+    left: 10px;
+    top: 5em;
+    color: white;
+    text-shadow: 0px 0px 5px black;
+
+}
+
+.prva_vest a,
+.mala_vest a {
+    position: absolute;
+    color: white;
+    text-decoration: none;
+    left: 10px;
+    bottom: 10px;
+    z-index: 10;
+}
+
+.vesti_blok_4 {
+    width: 49%;
+    height: 20em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.mala_vest {
+    width: 49%;
+    height: 9.9em;
+    position: relative;
+    overflow: hidden;
+}
+
+.mala_vest img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -5;
+}
+
+.mala_vest h4 {
+    position: absolute;
+    left: 5px;
+    top: 4em;
+    color: white;
+    text-shadow: 0px 0px 5px black;
+
+}
+
+.rubrika_3 {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0px;
+}
+
+.rubrika_vest_blok {
+    width: 32%;
+    display: flex;
+    flex-direction: column;
+}
+
+.rubrika_vest_blok_slika {
+    height: 300px;
+    overflow: hidden;
+}
+
+.rubrika_vest_blok_slika img {
+    width: 100%;
+}
+
+.rubrika_vest_blok a {
+    text-decoration: none;
+    color: black;
+    margin: 5px 0px;
+}
+
+.blok {
+    display: block;
+}
+
+.citanje_vesti {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cela_vest {
+    width: 68%; 
+    margin: 20px 0; 
+    padding: 20px; 
+    background-color: #f9f9f9;
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+
+.rubrika_desno {
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 350px; 
+    overflow: auto;
+}
+
+.rubrika_desno h2 {
+    margin-bottom: 20px; 
+}
+
+.rubrika_desno h4 a {
+    color: #333; 
+    text-decoration: none;
+}
+
+.rubrika_desno h4 a:hover {
+    color: red;
+}
+
+.rubrika_desno div {
+    margin-bottom: 20px; 
+}
+
+.lajk {
+    font-size: 1.3em;
+}
+
+.vest_pretraga {
+    display: flex;
+    flex-direction: row;
+    height: 150px;
+    margin: 20px 0px;
+    align-items: center;
+    margin: 20px; 
+    padding: 10px; 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+    background-color: #f9f9f9;
+}
+
+.vest_pretraga img {
+    height: 100%;
+    width: 220px;
+    margin-right: 20px;
+    border: 2px solid #ccc;
+}
+
+.vest_pretraga h3 a {
+    text-decoration: none;
+    color: #333; 
+    font-weight: bold; 
+}
+
+.vest_pretraga h3 a:hover {
+    color: #ff0000; 
+}
+
+.container_pretraga {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.container_rubrika_vesti {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0px;
+}
+
+.container_rubrika_vesti .prva_vest {
+    margin-bottom: 40px;
+}
+
+.komentari {
+    margin-top: 20px;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.komentar {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+.komentari {
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.komentar-info h5 {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.komentar-info p {
+    margin-bottom: 10px;
+}
+
+.komentar-feedback {
+    display: flex;
+    align-items: center;
+}
+
+.like-dislike {
+    margin-right: 10px;
+}
+
+.like-dislike a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s ease;
+}
+
+.like-dislike a:hover {
+    color: #007bff;
+}
+
+.like-dislike i {
+    margin-right: 5px;
+}
+
+.like-dislike span {
+    margin-left: 5px;
+}
+
+.forma_pisanje_komenatar input[type="text"],
+.forma_pisanje_komenatar textarea {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.forma_pisanje_komenatar input[type="submit"] {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.forma_pisanje_komenatar input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.lajkovi-dislajkovi {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+}
+
+.lajkovi-dislajkovi p {
+    margin: 5px;
+}
+
+.lajkovi-dislajkovi a {
+    text-decoration: none; 
+    color: inherit; 
+    margin-left: 10px;
+}
+
+.lajkovi-dislajkovi i {
+    margin-right: 5px;
+}
+
+.naslov_citanje_vesti {
+    width: 75%; 
+    margin: 20px 0; 
+    padding: 10px; 
+    background-color: #f2f2f2; 
+    border-radius: 5px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+}
+
