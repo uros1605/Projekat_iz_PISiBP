@@ -41,11 +41,15 @@ if (isset($_SESSION["id_korisnika"])) {
 
     <body>
         <section>
-            <?php
-            echo "<h2>$_SESSION[uloga]</h2>";
-            include "menu.php";
-
-            ?>
+        <?php if ($_SESSION["uloga"] == "glavni urednik"): ?>
+            <div class="main" style="position: relative;">
+        <?php else: ?>
+            <div style="position: relative; padding-top: 20px;"> 
+        <?php endif; ?>
+            <?php include "menu.php"; ?>
+            <h1 class="pocetna_velika_slova" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"><?php echo "IZMENI VEST"; ?></h1>
+        </div>
+        
             <div class="main">
                 <div class="card-body">
                     <?php

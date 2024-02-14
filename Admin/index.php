@@ -26,12 +26,19 @@ if(isset($_POST["submit"])){
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="sredina">
-    <form action="index.php" method="post">
-        <input type="text" name="username" placeholder="Korisničko ime" required>
-        <input type="password" name="password" placeholder="Lozinka" required>
-        <?php if(isset($greska)){echo $greska;} ?>
-        <input type="submit" name="submit" value="Uloguj se">
-    </form>
+    <div class="container">
+        <form action="index.php" method="post" class="login-form">
+            <h2>Prijavite se</h2>
+            <div class="input-container">
+                <input type="text" name="username" placeholder="Korisničko ime" required>
+            </div>
+            <div class="input-container">
+                <input type="password" name="password" placeholder="Lozinka" required>
+            </div>
+            <?php if(isset($greska)){echo '<p class="error">' . $greska . '</p>';} ?>
+            <button type="submit" name="submit" class="btn-login">Uloguj se</button>
+        </form>
+    </div>
     
 </body>
 </html>

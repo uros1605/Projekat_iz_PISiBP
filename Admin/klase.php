@@ -436,8 +436,111 @@ class AdminMetode{
         $stmt->execute();
     }
 
+    function getPoslednjeTriVestiIzRubrike($id_rubrike)
+    {
+        $stmt = $this->conn->prepare("select * from vest where id_rubrike = ? and stanje = 'objavljen' order by datum_vreme desc limit 3");
+        $stmt->bind_param("i", $id_rubrike);
+        $stmt->execute();
+        $rezultat = $stmt->get_result();
+
+        if ($rezultat->num_rows > 0) {
+            return $rezultat;
+        } else {
+            return false;
+        }
+    }
+
+    function lajkujVest($id_vesti)
+    {
+        $stmt = $this->conn->prepare("update vest set broj_lajkova = broj_lajkova+1 where id_vesti = ?");
+        $stmt->bind_param("i", $id_vesti);
+        $stmt->execute();
+    }
+
+    function dislajkujVest($id_vesti)
+    {
+        $stmt = $this->conn->prepare("update vest set broj_dislajkova = broj_dislajkova+1 where id_vesti = ?");
+        $stmt->bind_param("i", $id_vesti);
+        $stmt->execute();
+    }
+
+    function getKomentariByVestID($id_vesti)
+    {
+        $stmt = $this->conn->prepare("select * from komentari where id_vesti = ? order by datum_vreme desc");
+        $stmt->bind_param("i", $id_vesti);
+        $stmt->execute();
+        $rezultat = $stmt->get_result();
+
+        if ($rezultat->num_rows > 0) {
+            return $rezultat;
+        } else {
+            return false;
+        }
+    }
+
+    function posaljiKomentar($id_vesti, $posetilac, $sadrzaj)
+    {
+        $stmt = $this->conn->prepare("insert into komentari (posetilac, id_vesti, sadrzaj) values (?, ?, ?)");
+        $stmt->bind_param("sis", $posetilac, $id_vesti, $sadrzaj);
+        $stmt->execute();
+    }
+
+    function lajkujKomentar($id_komentara)
+    {
+        $stmt = $this->conn->prepare("update komentari set broj_lajkova = broj_lajkova + 1 where id_komentara = ?");
+        $stmt->bind_param("i", $id_komentara);
+        $stmt->execute();
+    }
+
+    function disLajkujKomentar($id_komentara)
+    {
+        $stmt = $this->conn->prepare("update komentari set broj_dislajkova = broj_dislajkova + 1 where id_komentara = ?");
+        $stmt->bind_param("i", $id_komentara);
+        $stmt->execute();
+    }
+
+    function pretragaVestiNaslov($naslov)
+    {
+        $naslov = "%$naslov%";
+        $stmt = $this->conn->prepare("select * from vest where naslov like ? and stanje = 'objavljen'");
+        $stmt->bind_param("s", $naslov);
+        $stmt->execute();
+        $rezultat = $stmt->get_result();
+        if ($rezultat->num_rows > 0) {
+            return $rezultat;
+        } else {
+            return false;
+        }
+    }
+
+    function pretragaVestiDatum($datum)
+    {
+        $stmt = $this->conn->prepare("select * from vest where date(datum_vreme) = ? and stanje = 'objavljen'");
+        $stmt->bind_param("s", $datum);
+        $stmt->execute();
+        $rezultat = $stmt->get_result();
+        if ($rezultat->num_rows > 0) {
+            return $rezultat;
+        } else {
+            return false;
+        }
+    }
+
+    function getTagoviBySadrzaj($sadrzaj)
+    {
+        $stmt = $this->conn->prepare("select * from tagovi where sadrzaj = ?");
+        $stmt->bind_param("s", $sadrzaj);
+        $stmt->execute();
+        $rezultat = $stmt->get_result();
+        if ($rezultat->num_rows > 0) {
+            return $rezultat;
+        } else {
+            return false;
+        }
+    }
+
 
 }
 
-$metode = new AdminMetode("localhost", "root", "", "uros_projekat1");
+$metode = new AdminMetode("localhost", "root", "", "uros_projekat3");
 session_start();

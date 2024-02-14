@@ -28,6 +28,7 @@ if (isset($_SESSION["id_korisnika"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administracija - Izmena urednika</title>
+    <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
@@ -38,7 +39,7 @@ if (isset($_SESSION["id_korisnika"])) {
     ?>
     <h3><?php if(isset($potvrda)) {echo $potvrda;} ?></h3>
 
-    <form action="<?php echo "izmena_urednika.php?id_urednika=$id_urednika"; ?>" method="post">
+    <form class="moja-forma" action="<?php echo "izmena_urednika.php?id_urednika=$id_urednika"; ?>" method="post">
         <input type="text" name="username" placeholder="unesi korisnicko ime"
         value ="<?php echo $urednik["username"]; ?>">
         <input type="text" name="ime_prezime" placeholder="ime i prezime"

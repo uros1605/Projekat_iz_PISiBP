@@ -23,7 +23,15 @@ if (isset($_SESSION["id_korisnika"])) {
 
         ?>
         <section>
-            <h1> Rubrika: <?php echo $rubrika["naziv"]; ?></h1>
+            <<?php if ($_SESSION["uloga"] == "glavni urednik"): ?>
+            <div class="main" style="position: relative;">
+        <?php else: ?>
+            <div style="position: relative; padding-top: 20px;"> 
+        <?php endif; ?>
+            <?php include "menu.php"; ?>
+            <h1 class="pocetna_velika_slova" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"><?php echo "Rubrika:"." " . $rubrika["naziv"]; ?></h1>
+        </div>
+        
             <div class="prikaz_rubrike">
                 <div class="kolona">
                     <h2>Lista novinara</h2>

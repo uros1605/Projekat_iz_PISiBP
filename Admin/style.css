@@ -23,43 +23,87 @@ p {
 
 .main{
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
-    flex-direction: row;
+    padding: 10px;
 }
 
 .polje{
-    width: 45%;
+    width: 47%;
+    height: 105px;
     border: 1px solid black;
     margin: 10px;
     padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.polje:hover {
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+.polje select {
+    padding: 10px; 
+    font-size: 16px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    background-color: #f9f9f9; 
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+    appearance: none;
+    background-image: linear-gradient(to bottom, transparent 50%, #4682B4 50%);
+    background-size: 10px 5px;
+    background-position: right 15px center;
+    background-repeat: no-repeat;
+}
+
+.polje select:hover,
+.polje select:focus {
+    border-color: #4682B4; 
 }
 
 .novinar_polje,
 .urednik_polje{
     width: 30%;
-    background-color: bisque;
-    border: 1px solid black;
-    margin: 10px;
-    padding: 10px;
+    border: 1px solid #ccc; 
+    background-color: #f9f9f9; 
+    margin: 10px; 
+    padding: 10px; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+    transition: box-shadow 0.3s ease;
+}
+
+.novinar_polje:hover {
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+.urednik_polje:hover {
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
 }
 
 .dugme {
-    background-color: deepskyblue;
-    margin: 10px;
-    padding: 10px;
+    background-color: #4682B4;
+    color: #FFF;
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .dugme:hover {
-    background-color: aquamarine;
+    background-color: #63B8FF;
 }
 
 .forma {
     border: 1px solid black;
-    margin: 10px;
+    margin: 50px auto;
     padding: 10px;
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 50%;
 }
 
 .forma input,
@@ -71,11 +115,28 @@ p {
 
 .clanak {
     border: 1px solid black;
-    margin: 10px;
-    padding: 10px;
+    margin: 30px auto;
+    padding: 20px;
     width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+    background-color: white; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.clanak h1 {
+    text-align: center; 
+    margin-bottom: 20px;
+}
+
+.dugme_clanak {
+    background-color: #4682B4;
+    color: #FFF;
+    margin-top: 15px;
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+    cursor: pointer; 
+    transition: background-color 0.3s ease;
 }
 
 .pocetna_velika_slova {
@@ -88,12 +149,195 @@ p {
     align-items: center;
 }
 
-.prikaz_rubrike {
-    display: flex;
-    flex-direction: row;
+.kolona {
+    width: calc(20% - 20px); 
+    margin: 20px 10px;
+    padding: 20px;
+    border: 1px solid #ccc; 
+    background-color: #f9f9f9; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+    transition: box-shadow 0.3s ease; 
 }
 
-.kolona {
-    width: 25%;
+.kolona:hover {
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); 
+}
 
+.kolona h2 {
+    margin-top: 0; 
+    margin-bottom: 20px; 
+}
+
+.kolona p {
+    margin-bottom: 10px; 
+}
+
+.prikaz_rubrike {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+}
+
+.actions {
+    margin-top: 10px; 
+}
+
+.actions button {
+    margin-right: 10px; 
+}
+
+.odobravanje_clanaka {
+    margin: 30px auto; 
+    padding: 20px;
+    border: 1px solid #ccc; 
+    background-color: #f9f9f9; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+    transition: box-shadow 0.3s ease; 
+}
+
+.odobravanje_clanaka h1 {
+    text-align: center;
+    margin: 30px auto;
+}
+
+.odobravanje_clanaka p {
+    text-align: center;
+}
+
+.odobravanje_clanaka a {
+    text-decoration: none; 
+    color: #333; 
+}
+
+.odobravanje_clanaka a:hover {
+    color: #666; 
+}
+
+.polje_novinar {
+    width: 70%;
+    margin: 20px auto; 
+    padding: 20px; 
+    border: 1px solid #ccc; 
+    background-color: #f9f9f9; 
+    border-radius: 8px; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
+    transition: box-shadow 0.3s ease; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+}
+
+.polje_novinar:hover {
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); 
+}   
+
+.polje_novinar h3 {
+    margin-bottom: 20px; 
+}
+
+.podaci_novinara {
+    width: 70%; 
+    margin: 20px auto;
+    padding: 20px; 
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.podaci_novinara h2,
+.podaci_novinara h3,
+.podaci_novinara p {
+    margin: 10px 0; 
+    text-align: center;
+}
+
+.moja-forma {
+    border: 1px solid #ccc;
+    background-color: #f9f9f9; 
+    border-radius: 8px; 
+    padding: 20px; 
+    margin: 20px auto; 
+    width: 70%; 
+}
+
+.moja-forma input[type="text"],
+.moja-forma input[type="password"],
+.moja-forma input[type="email"],
+.moja-forma textarea {
+    width: 100%; 
+    margin: 10px 0; 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    box-sizing: border-box; 
+}
+
+.moja-forma input[type="submit"] {
+    background-color: #4682B4; 
+    color: #FFF; 
+    margin-top: 15px; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+}
+
+.moja-forma input[type="submit"]:hover {
+    background-color: #63B8FF; 
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    width: 100%;
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-container {
+    margin-bottom: 20px;
+}
+
+.input-container input {
+    width: 93%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4682B4;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #63B8FF;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
 }

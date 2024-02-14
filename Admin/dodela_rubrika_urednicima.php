@@ -24,9 +24,14 @@ if (isset($_SESSION["id_korisnika"])) {
 
 </head>
 <body>
-    <?php
-    include "menu.php";
-    ?>
+        <?php if ($_SESSION["uloga"] == "glavni urednik"): ?>
+            <div class="main" style="position: relative;">
+        <?php else: ?>
+            <div style="position: relative; padding-top: 20px;">
+        <?php endif; ?>
+            <?php include "menu.php"; ?>
+            <h1 class="pocetna_velika_slova" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"><?php echo "DODELA RUBRIKA UREDNICIMA"; ?></h1>
+        </div>
     <h3><?php if(isset($potvrda)) {echo $potvrda;} ?></h3>
     <form action="dodela_rubrika_urednicima.php" method="post" class="forma">
         <select name="urednik_id">

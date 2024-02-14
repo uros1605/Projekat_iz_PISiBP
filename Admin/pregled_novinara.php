@@ -15,20 +15,32 @@ if (isset($_SESSION["id_korisnika"])) {
     <title>Administracija - Pregled novinara</title>
     <link rel="stylesheet" href="style.css">
 
+        <script>
+            function brisanjeNovinara(id_korisnika) {
+                var r = confirm("Da li ste sigurni?");
+                if (r == true) {
+                    window.location.href = "brisanje_korisnika.php?id_korisnika=" + id_korisnika + "&status=novinar";
+                }
+            }
+        </script>
+
 </head>
 <body>
     <section>
-    <?php
-    echo "<h2>$_SESSION[uloga]</h2>";
-    include "menu.php";
-
-    ?>
+        <?php if ($_SESSION["uloga"] == "glavni urednik"): ?>
+            <div class="main" style="position: relative;">
+        <?php else: ?>
+            <div style="position: relative; padding-top: 20px;"> 
+        <?php endif; ?>
+            <?php include "menu.php"; ?>
+            <h1 class="pocetna_velika_slova" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"><?php echo "PREGLED NOVINARA"; ?></h1>
+        </div>
     <div class="main">
         <?php
         $novinari = $metode->getSveNovinare();
         while($novinar = $novinari->fetch_assoc()) {
             echo "<div class=novinar_polje>";
-            echo "<h3>$novinar[ime_prezime]</h3>";
+            echo "<h2>$novinar[ime_prezime]</h2>";
             echo "<h3>$novinar[email]</h3>";
             echo "<h3>Rubrike</h3>";
             $rubrike_novinar = $metode->getNovinarRubrike($novinar["id_korisnika"]);
@@ -43,13 +55,16 @@ if (isset($_SESSION["id_korisnika"])) {
             }
             echo "<h3>Broj članaka</h3>";
             $broj_clanaka = $metode->getBrojClanakaByNovinar($novinar["id_korisnika"]);
-            echo "<p>$broj_clanaka[broj_clanaka]</p>";
-            echo "<div>
-            <a href=izmena_novinara.php?id_novinara=$novinar[id_korisnika]><button class=dugme>Izmena novinara</button></a>
-            <a href=brisanje_korisnika.php?id_korisnika=$novinar[id_korisnika]&status=$novinar[uloga]><button class=dugme>Obrisi</button></a>
-            <a href=promocija_novinar_urednik.php?id_novinara=$novinar[id_korisnika]><button class=dugme>Promocija novinara</button></a>
+            echo "<h3>Broj članaka</h3>";
+                    $broj_clanaka = $metode->getBrojClanakaByNovinar($novinar["id_korisnika"]);
+                    echo "<p>$broj_clanaka[broj_clanaka]</p>";
+                    echo "<div class=actions>
+            <a href=izmena_novinara.php?id_novinara=$novinar[id_korisnika]><button class=dugme>Izmena novinara</button></a>";
+
+                    echo "<button class=dugme onClick='brisanjeNovinara($novinar[id_korisnika])'>Obrisi</button>"
+                    echo "<a href=promocija_novinar_urednik.php?id_novinara=$novinar[id_korisnika]><button class=dugme>Promocija novinara</button></a>
             </div>";
-            echo "</div>";
+                    echo "</div>";
         }
         ?>
     </div>

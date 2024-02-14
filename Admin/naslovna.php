@@ -17,11 +17,14 @@ if (isset($_SESSION["id_korisnika"])) {
 
     <body>
         <section>
-            <?php
-
-            include "menu.php";
-            echo "<h2 class=pocetna_velika_slova>$_SESSION[uloga]</h2>";
-            ?>
+        <?php if ($_SESSION["uloga"] == "glavni urednik"): ?>
+            <div class="main" style="position: relative;">
+        <?php else: ?>
+            <div style="position: relative; padding-top: 20px;"> 
+        <?php endif; ?>
+            <?php include "menu.php"; ?>
+            <h1 class="pocetna_velika_slova" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"><?php echo $_SESSION["uloga"]; ?></h1>
+        </div>
 
             <?php
             //segment za glavnog urednika
@@ -79,9 +82,10 @@ if (isset($_SESSION["id_korisnika"])) {
             }
             // segment za novinara
             if ($_SESSION["uloga"] == "novinar") {
-                echo "<div>";
+                echo "<div class='podaci_novinara'>";
                 echo "<h2>" . $_SESSION["ime_prezime"] . "<h2>";
-                echo "<h2>" . $_SESSION["email"] . "<h2>";
+                echo "<h3>" . $_SESSION["email"] . "<h3>";
+                echo "<h3>Rubrike:<h3>";
                 $rubrike_novinar = $metode->getNovinarRubrike($_SESSION["id_korisnika"]);
                 if ($rubrike_novinar != false) {
                     while ($rubrika_novinar = $rubrike_novinar->fetch_assoc()) {
@@ -95,11 +99,11 @@ if (isset($_SESSION["id_korisnika"])) {
                 echo "</div>";
 
             ?>
-                <div class="polje">
+                <div class="polje_novinar">
                     <h3>Napiši novi članak</h3>
                     <a href="napisi_clanak.php"><button class="dugme">Napiši</button></a>
                 </div>
-                <div class="polje">
+                <div class="polje_novinar">
                     <h3>Lista članaka u draft stanju</h3>
                     <?php
                     $vesti_novinara_draft = $metode->getVestiByKorisnik($_SESSION["id_korisnika"], "draft");
@@ -113,7 +117,7 @@ if (isset($_SESSION["id_korisnika"])) {
                     ?>
                 </div>
 
-                <div class="polje">
+                <div class="polje_novinar">
                     <h3>Lista članaka koji čekaju odobrenje</h3>
                     <?php
                     $vesti_novinara_draft = $metode->getVestiByKorisnik($_SESSION["id_korisnika"], "odobrenje");
@@ -126,7 +130,7 @@ if (isset($_SESSION["id_korisnika"])) {
                     }
                     ?>
                 </div>
-                <div class="polje">
+                <div class="polje_novinar">
                     <h3>Lista objavljenih članaka</h3>
                     <?php
                     $vesti_novinara_draft = $metode->getVestiByKorisnik($_SESSION["id_korisnika"], "objavljen");
@@ -140,7 +144,7 @@ if (isset($_SESSION["id_korisnika"])) {
                     ?>
                 </div>
 
-                <div class="polje">
+                <div class="polje_novinar">
                     <h3>Podaci o urednicima</h3>
                     <?php
                     $rubrike_novinar = $metode->getNovinarRubrike($_SESSION["id_korisnika"]);
@@ -168,7 +172,7 @@ if (isset($_SESSION["id_korisnika"])) {
 
             if ($_SESSION["uloga"] == "urednik") {
 
-                echo "<div>";
+                echo "<div class='podaci_novinara'>";
                 echo "<h2>" . $_SESSION["ime_prezime"] . "<h2>";
                 echo "<h2>" . $_SESSION["email"] . "<h2>";
                 echo "<h2>Rubrike<h2>";
@@ -185,7 +189,7 @@ if (isset($_SESSION["id_korisnika"])) {
 
 
             ?>
-                <div class="polje">
+                <div class="polje_novinar">
                     <h3>Članci koji čekaju odobrenje</h3>
                     <?php
                     $rubrike_urednik = $metode->getUrednikRubrike($_SESSION["id_korisnika"]);
@@ -209,7 +213,7 @@ if (isset($_SESSION["id_korisnika"])) {
                     ?>
                 </div>
 
-                <div class="polje">
+                <div class="polje_novinar">
                     <h3>Članci koji su objavljeni</h3>
                     <?php
                     $rubrike_urednik = $metode->getUrednikRubrike($_SESSION["id_korisnika"]);
@@ -233,7 +237,7 @@ if (isset($_SESSION["id_korisnika"])) {
                     ?>
                 </div>
 
-                <div class="polje">
+                <div class="polje_novinar">
                     <h3>Zahtevi za izmenu ili brisanje članak</h3>
                     <?php
                     $rubrike_urednik = $metode->getUrednikRubrike($_SESSION["id_korisnika"]);
@@ -257,7 +261,7 @@ if (isset($_SESSION["id_korisnika"])) {
                     ?>
                 </div>
 
-                <div class="polje">
+                <div class="polje_novinar">
                     <h3>Podaci o novinarima</h3>
                     <?php
                     $rubrike_urednik = $metode->getUrednikRubrike($_SESSION["id_korisnika"]);

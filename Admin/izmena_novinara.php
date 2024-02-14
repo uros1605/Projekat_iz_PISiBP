@@ -38,7 +38,7 @@ if (isset($_SESSION["id_korisnika"])) {
     ?>
     <h3><?php if(isset($potvrda)) {echo $potvrda;} ?></h3>
 
-    <form action="<?php echo "izmena_novinara.php?id_novinara=$id_novinara"; ?>" method="post">
+    <form class="moja-forma" action="<?php echo "izmena_novinara.php?id_novinara=$id_novinara"; ?>" method="post">
         <input type="text" name="username" placeholder="unesi korisnicko ime"
         value ="<?php echo $novinar["username"]; ?>">
         <input type="text" name="ime_prezime" placeholder="ime i prezime"
